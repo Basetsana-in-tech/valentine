@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine Proposal</title>
+    <link rel="stylesheet" href="BeMyValentine.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="top-title">Valentine Proposal</h1>
+
+        <div class="valentine-popup">
+            <img id="display-img" src="">
+            <h2 id="main-text">Lehlohonolo, will you be my Valentine? 🌹</h2>
+            
+            <div class="button-group" id="btn-group">
+                <button id="yesButton" onclick="handleYes()">Yes</button>
+                <button id="noButton" onclick="handleNo()">No</button>
+            </div>
+        </div>
+
+        <div class="poem-box">
+            <p style="font-style: italic; margin: 0;">
+                From a simple swipe on Tinder's screen,<br>
+                To the sweetest soul I've ever seen.<br>
+                Two strangers met by lucky chance,<br>
+                Now here we are, in this romance. ❤️
+            </p>
+            
+            <p style="margin-top: 15px; font-weight: bold; margin-bottom: 5px;">I feel like this song with you</p>
+            <a href="https://music.apple.com/za/album/ola-dali/1726053351?i=1726053352" class="music-link" target="_blank">
+                🎵 Ola Dali by Danya Devs
+            </a>
+
+            <img class="poem-img" src="download (11).jpg">
+        </div>
+    </div>
+
+    <script>
+        let stage = 0;
+        let yesSize = 1;
+        const mainText = document.getElementById('main-text');
+        const displayImg = document.getElementById('display-img');
+        const yesBtn = document.getElementById('yesButton');
+
+        function handleYes() {
+            displayImg.src = "CLOCK ITTT.jpg";
+            displayImg.style.display = "block";
+            // Updated to use the success-text class (Bold, not Cursive)
+            mainText.innerHTML = "<div class='success-text'>CLOCK ITTT !!! ❤️</div>";
+            document.getElementById('btn-group').style.display = "none";
+            
+            for (let i = 0; i < 100; i++) { createConfetti(); }
+        }
+
+        function handleNo() {
+            if (stage === 0) {
+                stage = 1;
+                displayImg.src = "download (13).jpg"; 
+                displayImg.style.display = "block";
+                mainText.innerText = "Are you sure, Lehlohonolo? 🥺";
+                yesSize += 0.6;
+                yesBtn.style.transform = `scale(${yesSize})`;
+            } else {
+                displayImg.src = "download (14).jpg";
+                displayImg.style.display = "block";
+                mainText.innerText = "It doesn't matter, you're already my Valentine! ❤️";
+                document.getElementById('btn-group').style.display = "none";
+            }
+        }
+
+        function createConfetti() {
+            const colors = ['#ff7675', '#fdcb6e', '#55efc4', '#81ecec', '#a29bfe'];
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            document.body.appendChild(confetti);
+            confetti.style.left = Math.random() * window.innerWidth + 'px';
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.animate([
+                { top: '-10px', opacity: 1 },
+                { top: '100vh', opacity: 0, transform: `rotate(${Math.random() * 360}deg)` }
+            ], { duration: Math.random() * 3000 + 2000 });
+            setTimeout(() => confetti.remove(), 5000);
+        }
+    </script>
+</body>
+</html>
